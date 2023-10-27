@@ -4,6 +4,7 @@ import IQuestion from "../components/interfaces/IQuestion";
 import IQuestionGenerator from "../components/interfaces/IQuestionGenerator";
 import requests from "../requests";
 
+const LIMIT_WORDS_COUNT = 100;
 interface Data {
     questions: IQuestion[],
     isLoaded: boolean
@@ -14,8 +15,15 @@ export default function useQuestionGenerator(): IQuestionGenerator {
     const [num, setNum] = useState<number>(0);
 
     useEffect(() => {
+        const config = {
+            params: {
+                shuffle: true,
+                limit: LIMIT_WORDS_COUNT
+            }
+        };
+
         axios
-            .get(requests.fetchWords)
+            .get(requests.fetchWords, config)
             .then(res => {
                 const words: string[][] = res.data["words"];
                 const questions: IQuestion[] = words.map(x => {
