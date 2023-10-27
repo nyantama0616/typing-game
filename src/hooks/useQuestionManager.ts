@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import IQuestion from "../components/interfaces/IQuestion";
 import IQuestionManager from "../components/interfaces/IQuestyonManager";
-import { kanaToAlphabet } from "../components/utilities/utilities";
+// import { kanaToAlphabet } from "../utilities/utilities";
 import IKeyPressManager from "../components/interfaces/IKeyPressManager";
 import IQuestionGenerator from "../components/interfaces/IQuestionGenerator";
+import useKanaAlphabet from "./useKanaAlphabet";
 
 interface State {
     currentQuestion: IQuestion
@@ -27,6 +28,7 @@ const initialState: State = {
 
 export default function useQuestionManager(keyPressManager: IKeyPressManager, questionGenerator: IQuestionGenerator): IQuestionManager {
     const [state, setState] = useState<State>(initialState);
+    const { kanaToAlphabet, isLoaded } = useKanaAlphabet();
 
     useEffect(() => {
         //最初のQuestionをセット
@@ -40,6 +42,8 @@ export default function useQuestionManager(keyPressManager: IKeyPressManager, qu
 
     //キーが押された場合の処理
     useEffect(() => {
+        if (!isLoaded) return;
+        
         setState(prev => {
             const newState = { ...prev };
 
@@ -58,8 +62,6 @@ export default function useQuestionManager(keyPressManager: IKeyPressManager, qu
                 newState.returnValue.question = newState.currentQuestion.display;
                 newState.returnValue.unTypedKeys = _getUnTypedKeys(newState);
             }
-            
-            console.log(newState);
             
             return newState;
         });
