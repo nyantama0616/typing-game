@@ -152,7 +152,7 @@ export default function useQuestionManager(keyPressManager: IKeyPressManager, qu
         _state.currentQuestion = questionGenerator.getNextQuestion();
 
         _state.returnValue = {
-            question: _state.currentQuestion.kana,
+            question: _state.currentQuestion.display,
             typedKeys: "",
             unTypedKeys: ""
         };
