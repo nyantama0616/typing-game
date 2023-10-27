@@ -31,6 +31,8 @@ export default function useQuestionManager(keyPressManager: IKeyPressManager, qu
     const { kanaToAlphabet, isLoaded } = useKanaAlphabet();
 
     useEffect(() => {
+        if (!questionGenerator.isLoaded) return;
+        
         //最初のQuestionをセット
         setState(prev => {
             const newState = { ...prev };
@@ -38,7 +40,7 @@ export default function useQuestionManager(keyPressManager: IKeyPressManager, qu
             
             return newState;
         });
-    }, []);
+    }, [questionGenerator.isLoaded]);
 
     //キーが押された場合の処理
     useEffect(() => {
