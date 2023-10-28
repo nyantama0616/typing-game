@@ -11,7 +11,7 @@ export default function TopPage() {
     const questionManager = useQuestionManager(keyboardManager, questionGenerator);
 
     return (
-        <div className="top-page">
+        <div className="top-page" tabIndex={0} onKeyDown={e => keyboardManager.handleKeyDown(e)}>
             <h1>Top Page</h1>
             <h3>{questionManager.question}</h3>
             <p><span className="typed-keys">{questionManager.typedKeys}</span><span className="untyped-keys">{questionManager.unTypedKeys}</span></p>

@@ -1,5 +1,7 @@
+import React from "react";
 export default interface IKeyPressManager {
-    keyDownInfo: IKeyDownInfo
+    keyDownInfo: IKeyDownInfo //押されたキーの情報
+    handleKeyDown(e: React.KeyboardEvent<Element>): void //この関数をdiv要素などのonKeyDownにセットする
 }
 
 export interface IKeyDownInfo {
