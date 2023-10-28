@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import IQuestion from "../components/interfaces/IQuestion";
 import IQuestionManager from "../components/interfaces/IQuestyonManager";
-// import { kanaToAlphabet } from "../utilities/utilities";
 import IKeyPressManager from "../components/interfaces/IKeyPressManager";
 import IQuestionGenerator from "../components/interfaces/IQuestionGenerator";
 import useKanaAlphabet from "./useKanaAlphabet";
@@ -119,8 +118,17 @@ export default function useQuestionManager(keyPressManager: IKeyPressManager, qu
         let res = _state.candidates.length > 0 ? _state.candidates[0] : "";
         
         const n = _state.currentQuestion.kana.length;
-        for (let i = _state.pos; i < n; i++) {            
-            res += kanaToAlphabet(_state.currentQuestion.kana[i])![0];
+        for (let i = _state.pos; i < n; i++) {
+            try {
+                res += kanaToAlphabet(_state.currentQuestion.kana[i])![0];
+            } catch (e) {
+                const errorInfo = {
+                    state: _state,
+                    i: i
+                };
+                console.log(errorInfo);
+                throw e;
+            }
         }
         
         return res;
