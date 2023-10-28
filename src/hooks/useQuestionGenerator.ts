@@ -55,3 +55,34 @@ export default function useQuestionGenerator(): IQuestionGenerator {
         isLoaded: data.isLoaded
     }
 }
+
+export function useQuestionGeneratorTest(): IQuestionGenerator {
+    const [num, setNum] = useState<number>(0);
+
+    const questions = [
+        // {
+        //     kana: "かんきつるい",
+        //     display: "柑橘類"
+        // },
+        // {
+        //     kana: "あんにんどうふ",
+        //     display: "杏仁豆腐"
+        // },
+        {
+            kana: "ぱっくんちょ",
+            display: "ぱっくんちょ"
+        },
+    ]
+    function getNextQuestion() {
+        const question = questions[num % questions.length];
+        setNum(prev => {
+            return prev + 1;
+        });
+        return question;
+    }
+
+    return {
+        getNextQuestion,
+        isLoaded: true
+    }
+}

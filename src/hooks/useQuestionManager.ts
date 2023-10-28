@@ -60,6 +60,13 @@ export default function useQuestionManager(keyPressManager: IKeyPressManager, qu
                 }
 
                 newState.candidates = _getCandidates(newState);
+                const t = {
+                    question: newState.currentQuestion.kana,
+                    targetKana: newState.currentQuestion.kana[prev.pos],
+                    candidates: newState.candidates
+                };
+                console.log(t);
+                
                 newState.returnValue.question = newState.currentQuestion.display;
                 newState.returnValue.unTypedKeys = _getUnTypedKeys(newState);
             }
@@ -83,6 +90,19 @@ export default function useQuestionManager(keyPressManager: IKeyPressManager, qu
                     res.push(alphabet + candidate);
                 })
             });
+            return res;
+        } else if (targetKana === "ん" && _state.pos < _state.currentQuestion.kana.length) {
+            const candidates = _getCandidates(_state);
+            candidates.forEach(candidate => {
+                if (candidate[0] !== "n") {
+                    res.push("n" + candidate);
+                }
+
+                kanaToAlphabet("ん")?.forEach(alphabet => {
+                    res.push(alphabet + candidate);
+                });
+            });
+            return res;
         }
 
         const t = 0 < _state.pos && _state.pos < _state.currentQuestion.kana.length ?  kanaToAlphabet(_state.currentQuestion.kana.slice(_state.pos - 1, _state.pos + 1)) : undefined;

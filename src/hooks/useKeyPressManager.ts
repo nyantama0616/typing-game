@@ -11,7 +11,6 @@ export default function useKeyboardManager(): IKeyPressManager {
     const [keyDownInfo, setKeydownInfo] = useState<IKeyDownInfo>(initialKeyDownInfo);
 
     function handleKeyDown(e: React.KeyboardEvent<Element>) {
-        console.log(`${e.key} from useKeyPress`);
         setKeydownInfo(prev => {
             const newKeydownInfo = {
                 count: prev.count + 1,

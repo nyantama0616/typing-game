@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import useKeyboardManager from "../../hooks/useKeyPressManager";
-import useQuestionGenerator from "../../hooks/useQuestionGenerator";
+import useQuestionGenerator, {useQuestionGeneratorTest} from "../../hooks/useQuestionGenerator";
 import useQuestionManager from "../../hooks/useQuestionManager";
 
 import "./TopPage.css";
 
 export default function TopPage() {
     const keyboardManager = useKeyboardManager();
-    const questionGenerator = useQuestionGenerator();
+    // const questionGenerator = useQuestionGenerator();
+    const questionGenerator = useQuestionGeneratorTest();
     const questionManager = useQuestionManager(keyboardManager, questionGenerator);
 
     return (
