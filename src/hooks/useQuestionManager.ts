@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import IQuestion from "../components/interfaces/IQuestion";
-import IQuestionManager from "../components/interfaces/IQuestyonManager";
-import IKeyPressManager from "../components/interfaces/IKeyPressManager";
-import IQuestionGenerator from "../components/interfaces/IQuestionGenerator";
+import IQuestion from "../interfaces/IQuestion";
+import IQuestionManager from "../interfaces/IQuestyonManager";
+import IKeyPressManager from "../interfaces/IKeyPressManager";
+import IQuestionGenerator from "../interfaces/IQuestionGenerator";
 import useKanaAlphabet from "./useKanaAlphabet";
 
 interface State {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import IKeyPressManager, { IKeyDownInfo } from "../components/interfaces/IKeyPressManager";
+import IKeyPressManager, { IKeyDownInfo } from "../interfaces/IKeyPressManager";
 
 const initialKeyDownInfo: IKeyDownInfo = {
     count: 0,

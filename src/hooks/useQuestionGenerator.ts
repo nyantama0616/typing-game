@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import IQuestion from "../components/interfaces/IQuestion";
-import IQuestionGenerator from "../components/interfaces/IQuestionGenerator";
+import IQuestion from "../interfaces/IQuestion";
+import IQuestionGenerator from "../interfaces/IQuestionGenerator";
 import requests from "../requests";
 
 const LIMIT_WORDS_COUNT = 100;
