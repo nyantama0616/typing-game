@@ -1,0 +1,28 @@
+.typed-keys {
+    color: gray;
+}
+
+.untyped-keys {
+    color: black;
+}
+
+.typing-game {
+    width: 1200px;
+    height: 800px;
+    position: relative;
+}
+
+.question {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.question h1 {
+    font-size: 40px;
+}
+
+.question h3 {
+    font-size: 30px;
+}
