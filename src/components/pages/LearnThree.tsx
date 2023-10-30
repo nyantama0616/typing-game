@@ -3,7 +3,7 @@ import { OrbitControls, Environment, Image, Text } from '@react-three/drei';
 import { Canvas, useLoader } from '@react-three/fiber';
 import { Vector3 } from "three";
 import requests from "../../requests";
-// import {ImageLo}
+import "./LearnThree.css";
 export default function LearnThree() {
     const [x, setX] = useState(-10);
     const [time, setTime] = useState(0);
