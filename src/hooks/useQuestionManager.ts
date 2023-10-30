@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import IQuestion from "../interfaces/IQuestion";
-import IQuestionManager from "../interfaces/IQuestyonManager";
+import IQuestionManager from "../interfaces/IQuestionManager";
 import IKeyPressManager from "../interfaces/IKeyPressManager";
 import IQuestionGenerator from "../interfaces/IQuestionGenerator";
 import useKanaAlphabet from "./useKanaAlphabet";

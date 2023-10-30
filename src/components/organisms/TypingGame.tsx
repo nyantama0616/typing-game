@@ -1,7 +1,7 @@
 import { OrbitControls, Environment, Image, Text } from '@react-three/drei';
 import { Canvas, useLoader } from '@react-three/fiber';
 import { Vector3 } from "three";
-import IQuestionManager from '../../interfaces/IQuestyonManager';
+import IQuestionManager from '../../interfaces/IQuestionManager';
 import SushiMesh from '../compounds/SushiMesh';
 import "./TypingGame.css";
 
