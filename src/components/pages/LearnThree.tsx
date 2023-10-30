@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
-import { OrbitControls, Environment, Image } from '@react-three/drei';
-import { Canvas, useLoader, Vector3 } from '@react-three/fiber';
+import { OrbitControls, Environment, Image, Text } from '@react-three/drei';
+import { Canvas, useLoader } from '@react-three/fiber';
+import { Vector3 } from "three";
 import requests from "../../requests";
 // import {ImageLo}
 export default function LearnThree() {
@@ -22,8 +23,8 @@ export default function LearnThree() {
             <h1>Learn Three</h1>
             <Canvas>
                 <OrbitControls />
-                {/* <Box position={[-1.2, 0, 0]} /> */}
-                <SushiCube position={[x, 0, 0]} />
+                <QuestionMesh text="hello" position={new Vector3(0, 1, 0)}/>
+                <SushiMesh position={new Vector3(x, 0, 0)} />
                 <pointLight position={[10, 10, 10]} />
                 <Environment preset="sunset" blur={0.7} background />
             </Canvas>
@@ -31,30 +32,37 @@ export default function LearnThree() {
     )
 }
 
-// interface BoxProps {
-//     position: any
-// }
-// const Box = ({position}: BoxProps) => {
-//     const [color, setColor] = useState<string>('hotpink')
-//     return (
-//         <mesh
-//             onClick={() => {
-//                 color === 'hotpink' ? setColor('orange') : setColor('hotpink')
-//             }}>
-//             {/* <Box position={[0, 0, 0]}/> */}
-//             {/* <boxGeometry args={[1, 2, 3]} /> */}
-//             <meshStandardMaterial color={color} />
-//         </mesh>
-//     )
-// }
-
 interface SushiCubeProps {
     position: Vector3
 }
-function SushiCube({position}: SushiCubeProps) {
+function SushiMesh({position}: SushiCubeProps) {
     return (
         <mesh>
             <Image position={position} url={requests.fetchSushiImage} />
+        </mesh>
+    )
+}
+ 
+interface QuestionMeshProps {
+    text: string,
+    position: Vector3
+}
+function QuestionMesh({ text, position }: QuestionMeshProps) {
+    const position2 = position.clone().add(new Vector3(0, -2, 0));
+    return (
+        <mesh>
+            <Text position={position}
+                color="#000"
+                fontSize={2}
+            >
+                {text}
+            </Text>
+            <Text position={position2}
+                color="#000"
+                fontSize={1}
+            >
+                {text}
+            </Text>
         </mesh>
     )
 }
