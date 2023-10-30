@@ -22,8 +22,6 @@ export default function useKanaAlphabet() {
                 }
 
                 setState(_ => {
-                    console.log(dict);
-                    
                     return {
                         kanaAlphabetDict: dict,
                         isLoaded: true
