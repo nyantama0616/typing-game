@@ -68,9 +68,13 @@ export function useQuestionGeneratorTest(): IQuestionGenerator {
         //     kana: "あんにんどうふ",
         //     display: "杏仁豆腐"
         // },
+        // {
+        //     kana: "ぱっくんちょ",
+        //     display: "ぱっくんちょ"
+        // },
         {
-            kana: "ぱっくんちょ",
-            display: "ぱっくんちょ"
+            kana: "こんやはこんにゃく",
+            display: "今夜はこんにゃく"
         },
     ]
     function getNextQuestion() {

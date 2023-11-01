@@ -94,7 +94,7 @@ export default function useQuestionManager(keyPressManager: IKeyPressManager, qu
         } else if (targetKana === "ん" && _state.pos < _state.currentQuestion.kana.length) {
             const candidates = _getCandidates(_state);
             candidates.forEach(candidate => {
-                if (candidate[0] !== "n") {
+                if (candidate[0] !== "n" && candidate[0] !== "y") {
                     res.push("n" + candidate);
                 }
 
