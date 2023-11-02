@@ -1,24 +1,16 @@
-import React, { useEffect } from "react";
-import useTimeManager from "../../hooks/useITimeManager";
+import useGameManager from "../../hooks/useGameManager";
 import useKeyboardManager from "../../hooks/useKeyPressManager";
-import useQuestionGenerator, { useQuestionGeneratorTest } from "../../hooks/useQuestionGenerator";
-import useQuestionManager from "../../hooks/useQuestionManager";
 import TypingGame from "../organisms/TypingGame";
 
 import "./TopPage.css";
 
 export default function TopPage() {
     const keyboardManager = useKeyboardManager();
-    // const questionGenerator = useQuestionGenerator();
-    const questionGenerator = useQuestionGeneratorTest();
-    const questionManager = useQuestionManager(keyboardManager, questionGenerator);
-    const timeManager = useTimeManager();
+    const gameManager = useGameManager(keyboardManager);
 
     return (
         <div className="top-page" tabIndex={0} onKeyDown={e => keyboardManager.handleKeyDown(e)}>
-            <TypingGame questionManager={questionManager} />
-            <h3>{timeManager.time}</h3>
-            <button onClick={timeManager.toggle}>push!</button>
+            <TypingGame gameManager={gameManager}/>
         </div>
     )
 }
