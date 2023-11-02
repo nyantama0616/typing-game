@@ -3,5 +3,11 @@ export default interface ITimeManager {
     stop(): void //一時停止
     reset(): void //停止し、timeを0に
     toggle(): void //start or stop
-    time: number //ms
+    time: Time
+}
+
+export interface Time {
+    current: number, //ms
+    prev: number,
+    delta: number
 }
