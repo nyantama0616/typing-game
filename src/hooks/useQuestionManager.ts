@@ -9,13 +9,21 @@ interface State {
     currentQuestion: IQuestion
     candidates: string[]
     pos: number //何番目の「かな」を注目しているか
-    returnValue: IQuestionManager
+    returnValue: ReturnValue
 }
 
-const initialReturnValue: IQuestionManager = {
+interface ReturnValue {
+    question: string
+    typedKeys: string
+    unTypedKeys: string
+    isCompleted: boolean
+}
+
+const initialReturnValue: ReturnValue = {
     question: "",
     typedKeys: "",
-    unTypedKeys: ""
+    unTypedKeys: "",
+    isCompleted: false
 }
 
 const initialState: State = {
@@ -43,7 +51,7 @@ export default function useQuestionManager(keyPressManager: IKeyPressManager, qu
 
     //キーが押された場合の処理
     useEffect(() => {
-        if (!isLoaded) return;
+        if (!isLoaded || state.returnValue.isCompleted) return;
         
         setState(prev => {
             const newState = { ...prev };
@@ -55,19 +63,12 @@ export default function useQuestionManager(keyPressManager: IKeyPressManager, qu
             }
 
             if (newState.candidates.length === 0) { //候補がなくなったら次の「かな」へ
-                if (newState.pos >= newState.currentQuestion.kana.length) { //すべての「かな」をタイプし終えたら次の問題へ
-                    _nextQuestion(newState);
+                if (newState.pos >= newState.currentQuestion.kana.length) { //すべての「かな」をタイプし終えたら、next()が呼ばれるまで何もしない
+                    newState.returnValue.isCompleted = true;
+                    return newState;
                 }
 
                 newState.candidates = _getCandidates(newState);
-                const t = {
-                    question: newState.currentQuestion.kana,
-                    targetKana: newState.currentQuestion.kana[prev.pos],
-                    candidates: newState.candidates
-                };
-                console.log(t);
-                
-                newState.returnValue.question = newState.currentQuestion.display;
                 newState.returnValue.unTypedKeys = _getUnTypedKeys(newState);
             }
             
@@ -182,9 +183,26 @@ export default function useQuestionManager(keyPressManager: IKeyPressManager, qu
         _state.returnValue = {
             question: _state.currentQuestion.display,
             typedKeys: "",
-            unTypedKeys: ""
+            unTypedKeys: "",
+            isCompleted: false
         };
+
+        _state.candidates = _getCandidates(_state);
+
+        _state.returnValue.question = _state.currentQuestion.display;
+        _state.returnValue.unTypedKeys = _getUnTypedKeys(_state);
+    }
+
+    function next() {
+        setState(prev => {
+            const newState = { ...prev };
+            _nextQuestion(newState);
+            return newState;
+        });
     }
     
-    return state.returnValue;
+    return {
+        ...state.returnValue,
+        next
+    }
 }
