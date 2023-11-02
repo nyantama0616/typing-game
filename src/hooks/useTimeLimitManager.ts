@@ -12,14 +12,14 @@ const initialState = {
     passedTimeOnSet: 0
 }
 
-const LIMIT_ON_SET = 10000; //ms
+const LIMIT_ON_SET = 5000; //ms
 
 export default function useTimeLimitManager(timeManager: ITimeManager): ITimeLimitManager {
     const [state, setState] = useState<State>(initialState);
-    const [x, setX] = useState(0);
 
     useEffect(() => {
         if (timeManager.time.delta === 0) return;
+        
         setState(prev => {
             const newState = { ...prev };
             newState.remainingTime -= timeManager.time.delta;
@@ -32,9 +32,18 @@ export default function useTimeLimitManager(timeManager: ITimeManager): ITimeLim
         timeManager.start();
     }
 
+    function resetPassedTimeOnSet() {
+        setState(prev => {
+            const newState = { ...prev };
+            newState.passedTimeOnSet = 0;
+            return newState;
+        });
+    }
+
     return {
         LIMIT_ON_SET,
         ...state,
         start,
+        resetPassedTimeOnSet
     }
 }
